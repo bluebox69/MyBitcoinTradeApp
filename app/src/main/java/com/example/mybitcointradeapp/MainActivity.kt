@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             MyBitcoinTradeAppTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Paul",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
