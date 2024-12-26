@@ -1,6 +1,5 @@
-package com.example.mybitcointradeapp.ui.theme
+package com.example.mybitcointradeapp.presentation.ui.theme
 
-import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.MaterialTheme
