@@ -1,24 +1,25 @@
-package com.example.mybitcointradeapp.domain.use_case.getCoins
+package com.example.mybitcointradeapp.domain.use_case.getUsdToEurRate
 
 import com.example.mybitcointradeapp.common.Resource
-import com.example.mybitcointradeapp.data.remote.dto.toCoin
-import com.example.mybitcointradeapp.domain.model.Coin
-import com.example.mybitcointradeapp.domain.repository.CoinRepository
+import com.example.mybitcointradeapp.data.remote.dto.toEurRate
+import com.example.mybitcointradeapp.domain.model.UsdToEurRate
+import com.example.mybitcointradeapp.domain.repository.UsdToEurRateRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetCoinsUseCase @Inject constructor(
-    private val repository: CoinRepository
+class GetUsdToEurRatUseCase @Inject constructor(
+    private val repository: UsdToEurRateRepository
 ) {
     //With Resource we can emit Success , Error oder Loading
-   operator fun invoke(): Flow<Resource<List<Coin>>> = flow {
+   operator fun invoke(): Flow<Resource<UsdToEurRate>> = flow {
        try {
            emit(Resource.Loading())
-           val coins =  repository.getCoins().map { it.toCoin() }
-           emit(Resource.Success(coins))
+           val usdToEurDto = repository.getUsdToEurRate()
+           val eurRate = usdToEurDto.toEurRate()
+           emit(Resource.Success(eurRate))
 
        } catch (e: HttpException) {
            emit(Resource.Error(e.localizedMessage ?: "An unexpected Error occurred"))

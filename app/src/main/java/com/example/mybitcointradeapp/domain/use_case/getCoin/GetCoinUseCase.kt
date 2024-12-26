@@ -1,4 +1,4 @@
-package com.example.mybitcointradeapp.domain.use_case.getCoins
+package com.example.mybitcointradeapp.domain.use_case.getCoin
 
 import com.example.mybitcointradeapp.common.Resource
 import com.example.mybitcointradeapp.data.remote.dto.toCoin
@@ -10,15 +10,15 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetCoinsUseCase @Inject constructor(
+class GetCoinUseCase @Inject constructor(
     private val repository: CoinRepository
 ) {
     //With Resource we can emit Success , Error oder Loading
-   operator fun invoke(): Flow<Resource<List<Coin>>> = flow {
+   operator fun invoke(coinId: String): Flow<Resource<Coin>> = flow {
        try {
            emit(Resource.Loading())
-           val coins =  repository.getCoins().map { it.toCoin() }
-           emit(Resource.Success(coins))
+           val coin =  repository.getCoinById(coinId).toCoin()
+           emit(Resource.Success(coin))
 
        } catch (e: HttpException) {
            emit(Resource.Error(e.localizedMessage ?: "An unexpected Error occurred"))
