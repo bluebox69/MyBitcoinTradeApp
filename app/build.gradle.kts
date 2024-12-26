@@ -64,4 +64,7 @@ dependencies {
     // Retrofit
     implementation (libs.retrofit)
 
+    // gson
+    implementation (libs.gson)
+
 }
