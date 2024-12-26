@@ -67,4 +67,7 @@ dependencies {
     // gson
     implementation (libs.gson)
 
+    //
+    implementation ("javax.inject:javax.inject:1")
+
 }
