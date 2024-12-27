@@ -1,6 +1,11 @@
 package com.example.mybitcointradeapp.di
 
+import android.app.Application
 import com.example.mybitcointradeapp.common.Constant
+import com.example.mybitcointradeapp.data.local.dao.InvestmentDao
+import com.example.mybitcointradeapp.data.local.dao.PortfolioDao
+import com.example.mybitcointradeapp.data.local.dao.TransactionDao
+import com.example.mybitcointradeapp.data.local.database.AppDatabase
 import com.example.mybitcointradeapp.data.remote.CoinPaprikaAPI
 import com.example.mybitcointradeapp.data.remote.FrankfurterExchangeAPI
 import com.example.mybitcointradeapp.data.repository.CoinRepositoryImpl
@@ -53,6 +58,24 @@ object AppModule {
     fun provideUsdToEurRateRepository(api: FrankfurterExchangeAPI): UsdToEurRateRepository {
         return UsdToEurRepositoryImpl(api)
     }
+
+    @Provides
+    @Singleton
+    fun provideDatabase(app: Application): AppDatabase {
+        return AppDatabase.getDatabase(app)
+    }
+
+    @Provides
+    @Singleton
+    fun provideInvestmentDao(db: AppDatabase): InvestmentDao = db.investmentDao()
+
+    @Provides
+    @Singleton
+    fun providePortfolioDao(db: AppDatabase): PortfolioDao = db.portfolioDao()
+
+    @Provides
+    @Singleton
+    fun provideTransactionDao(db: AppDatabase): TransactionDao = db.transactionDao()
 
 
 }
