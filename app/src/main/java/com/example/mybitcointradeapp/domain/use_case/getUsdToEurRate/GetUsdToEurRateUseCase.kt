@@ -10,7 +10,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetUsdToEurRatUseCase @Inject constructor(
+class GetUsdToEurRateUseCase @Inject constructor(
     private val repository: UsdToEurRateRepository
 ) {
     //With Resource we can emit Success , Error oder Loading
